@@ -12,6 +12,10 @@ It is mainly used for setting the focus - Click Focus and switching between Auto
 allows scrolling through various options, and when in manual focus mode to set where you want to focus. The buttons act 
 as shortcuts.
 
+A diagram showing the connections for the MCP23017: 
+<img src="https://github.com/kazzle101/MicroscopeCameraController/blob/master/microscope_controller_s.png">
+https://github.com/kazzle101/MicroscopeCameraController/blob/master/microscope_controller_s.png
+
 I have made a video showing its use: https://www.youtube.com/watch?v=tAYUrnRACeo
 
 
