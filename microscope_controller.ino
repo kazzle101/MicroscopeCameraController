@@ -1,6 +1,7 @@
 
 
-// Teensy 3.2
+// for Teensy 3.2
+// in Ardunio IDE in Tools set the USB Type: Serial + Keyboard + Mouse + Joystick
 
 #include <SPI.h>
 #include <Wire.h>
@@ -91,6 +92,7 @@ void setup() {
 void loop() {
   currentTime = millis();
 
+  // scan for buttons being pressed, rotary encoder being turned
   if (currentTime >= (loopTime + 5)) {
     readRotaryEncoder();
     readRotaryButton();
@@ -98,19 +100,21 @@ void loop() {
     loopTime = currentTime;
   }
 
+  // things to do when a button is pressed
   if (btns.value != 0) {
     macroButtonRun(btns.value);
     oledShowMainOptions();
     btns.value=0;    
   }
   
-
+  // when the button the the rotary encoder is clicked
   if (enc.isRotaryBtn) {
     macroRun(controls.optPos);
     oledShowMainOptions();
     enc.isRotaryBtn = false;
   }
 
+  // wehn the rotary encoder is being turned
   if (enc.isRotating) {
     
     digitalWrite(MONITOR_LED, HIGH);

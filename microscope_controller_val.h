@@ -1,8 +1,11 @@
+
+// almost all the confiuration is here
+
 struct ENCODER {
 
-  const byte rotaryAB[2] = {1, 0};
-  const byte rotaryBtn = 2;
-  const byte rotaryLED[3] = { 15, 14, 13};  // R G B
+  const byte rotaryAB[2] = {1, 0};  // MCP23017 GPA input pins
+  const byte rotaryBtn = 2;         // MCP23017 GPA input pins
+  const byte rotaryLED[3] = { 15, 14, 13};  // MCP23017 GPB output pins - R G B
 
   boolean colours[8][3] = { {1, 1, 1},  // 0 off (black)
                             {1, 1, 0},  // 1 red      
@@ -38,8 +41,8 @@ struct BUTTONS {
 
   const byte numberOfButtons = 4;
 
-  const byte buttonPins[4] = { 6, 3, 4, 5};
-  const byte buttonLEDs[4] = { 11, 9, 10, 12};
+  const byte buttonPins[4] = { 6, 3, 4, 5};     // MCP23017 GPA input pins
+  const byte buttonLEDs[4] = { 11, 9, 10, 12};  // MCP23017 GPB output pins
 
   byte lastValue = 0;
   byte value = 0;
@@ -63,10 +66,12 @@ struct CONTROLS {
   const char opts[5][16] = { "Manual Focus", "Auto Focus", "Click Focus", "Exp. Bright", "Exp. Gain" };  
   int optPos = 0;
   int optMax = 5-1;
-  int optDelay = 250;
+  int optDelay = 250; 
   int optWheel = 2;
-  
-  // type:     1 = button, 2 = slider, 3 = radio, 4 = number up/down
+
+  // location of the camera controls, where to click on the screen
+  // array = {type, x, y}
+  // type:     1 = button, 2 = slider, 3 = radio, 4 = number up/down (not used)
   // location: x, y
   int mfSelect[3] = {2, 64, 25};
   int af[3] = {1, 40, 35 };

@@ -1,4 +1,6 @@
 
+
+// common header for all the mouse control
 void macroHead() {
   sprintf(oledText.line1, "Set %s", menuTitle);
   oledTextOutput();
@@ -7,6 +9,7 @@ void macroHead() {
 
 }
 
+// common scroll wheel function
 void macroScrollWheel() {
 
   int xx = 0;
@@ -117,8 +120,8 @@ void macroSetExposureGain() {
 }
 
 
+// when the button on the rotary encoder has been pressed
 void macroRun(int opt) {
-
 
   enc.isRotaryBtn = false;
   menuTitle[0] = {0};
@@ -155,15 +158,17 @@ void macroRun(int opt) {
 
   enc.isRotaryBtn = false;
   delay(30);
-  Mouse.moveTo(camera.resolution[0], camera.resolution[1]);
+  Mouse.moveTo(camera.resolution[0], camera.resolution[1]);  // move the mouse cursor out of the way
   btns.value = 0;
   setRGBcolour(enc.colours[0]); 
 }
 
+
+// when one of the buttons has been pressed
 void macroButtonRun(byte opt) {
 
-    Serial.print("macro button: ");
-    Serial.println(opt);
+//    Serial.print("macro button: ");
+//    Serial.println(opt);
 
     menuTitle[0] = {0};
 
