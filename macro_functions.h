@@ -123,6 +123,7 @@ void macroSetExposureGain() {
 // when the button on the rotary encoder has been pressed
 void macroRun(int opt) {
 
+  digitalWrite(MONITOR_LED,LOW);
   enc.isRotaryBtn = false;
   menuTitle[0] = {0};
   strcat(menuTitle, controls.opts[opt]);
@@ -170,6 +171,7 @@ void macroButtonRun(byte opt) {
 //    Serial.print("macro button: ");
 //    Serial.println(opt);
 
+    digitalWrite(MONITOR_LED,LOW);
     menuTitle[0] = {0};
 
     switch (opt) {

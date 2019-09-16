@@ -87,6 +87,8 @@ void setup() {
   digitalWrite(MONITOR_LED, LOW);
   oledShowMainOptions();
   delay(500);
+
+  oledText.blankMillis = millis() + oledText.blankDelay;
 }
 
 void loop() {
@@ -100,11 +102,28 @@ void loop() {
     loopTime = currentTime;
   }
 
+  // blank the display afer a certain amount of time
+  if (currentTime >= oledText.blankMillis && oledText.screenBlank == false) {
+    //setRGBcolour(enc.colours[5]);
+    oledBlankDisplay();    
+    oledText.screenBlank = true;
+    oledText.blankMillis = currentTime + oledText.blankDelay;    
+  }
+
+  // blink an LED occasionally while the display is blank
+  if (((currentTime - oledText.blinkyMillis) >= oledText.blinkyPeriod) && oledText.screenBlank == true) {
+    oledText.blinkyPeriod = (oledText.blinkyLED ? oledText.blinky[1] : oledText.blinky[0]);
+    oledText.blinkyLED = !(oledText.blinkyLED);
+    oledText.blinkyMillis = currentTime;
+    digitalWrite(MONITOR_LED, oledText.blinkyLED);
+  }
+
   // things to do when a button is pressed
   if (btns.value != 0) {
     macroButtonRun(btns.value);
     oledShowMainOptions();
     btns.value=0;    
+    oledText.screenBlank = false;
   }
   
   // when the button the the rotary encoder is clicked
@@ -112,11 +131,12 @@ void loop() {
     macroRun(controls.optPos);
     oledShowMainOptions();
     enc.isRotaryBtn = false;
+    oledText.screenBlank = false;
+
   }
 
-  // wehn the rotary encoder is being turned
-  if (enc.isRotating) {
-    
+  // when the rotary encoder is being turned
+  if (enc.isRotating) {    
     digitalWrite(MONITOR_LED, HIGH);
     if (enc.rotation) {
       setRGBcolour(enc.colours[5]);
@@ -135,6 +155,7 @@ void loop() {
     delay(40);
     digitalWrite(MONITOR_LED, LOW);
     setRGBcolour(enc.colours[0]);
+    oledText.screenBlank = false;
   }
 
 

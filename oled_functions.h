@@ -8,6 +8,11 @@ void clearOLEDtext() {
   oledText.line4[0] = {0};
 }
 
+void oledBlankDisplay() {
+  display.clearDisplay();
+  display.display();  
+}
+
 // not used, I didn't like the text size
 void oledTextOutputLarge() {
 

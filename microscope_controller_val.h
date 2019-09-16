@@ -49,10 +49,22 @@ struct BUTTONS {
 };
 
 struct OLEDTEXT {
+  const unsigned long blankDelay = 120 * 1000;  // two minutes
+  unsigned long blankMillis;
+  boolean screenBlank = false;
+
+  // blink an LED occasionally while the display is blank
+  const unsigned long blinky[2] = { 120, 8000 }; // onTime, offTime
+  unsigned long blinkyMillis = 0;
+  unsigned long blinkyPeriod = blinky[0];
+  boolean blinkyLED = true;
+  
+  
   char line1[21] = {0};
   char line2[21] = {0};
   char line3[21] = {0};
   char line4[21] = {0};
+  
 };
 
 struct CAMERA {
